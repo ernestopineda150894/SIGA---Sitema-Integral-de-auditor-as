@@ -1,7 +1,0 @@
-Atención: En un entorno de producción, las contraseñas nunca se guardan en texto plano. Se almacenan usando un hash seguro (ej. BCrypt o Argon2).
-
-Usuario: audit_admin
-
-Contraseña: AuditSecure2026!
-
-Hash BCrypt (para el código): $2a$12$e8.8NlPshEw5f76Y.pY6mO6dC4W/6R2N7bH/.b6/8GZ5r4n3p1l7K (generado para la contraseña de prueba)
