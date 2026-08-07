@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Sistema de Auditoría</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Librería BCrypt para verificación segura en cliente (para prototipos) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Sistema de Auditoría</h2>
+            <p>Acceso Restringido</p>
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+            <div class="input-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" required maxlength="30" placeholder="Ingrese su usuario">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" required placeholder="••••••••••••">
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <button type="submit" id="submitBtn">Iniciar Sesión</button>
+        </form>
+        
+        <div class="security-footer">
+            <small>🔒 Conexión cifrada y monitoreada</small>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
