@@ -62,7 +62,7 @@ a{color:inherit;}
 ::-webkit-scrollbar-thumb{background:#c3ccd8;border-radius:10px;}
 ::-webkit-scrollbar-thumb:hover{background:#a9b5c4;}
 
-/* ============ LOGIN (nuevo diseño claro, configurable por Identidad Corporativa) ============ */
+/* ============ LOGIN ============ */
 :root{
   --lg-blue:#1656d9;
   --lg-blue-dark:#0d3fae;
@@ -73,79 +73,94 @@ a{color:inherit;}
 }
 #login-screen{
   position:fixed;inset:0;
-  display:flex;
-  align-items:stretch;
-  overflow:hidden;
-  background:linear-gradient(160deg,#eef5fc 0%,#e2edf9 45%,#eaf2fb 100%);
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  background:var(--navy-950);
   z-index:500;
 }
 #login-screen.hidden{display:none;}
-
-.lg-shapes{position:absolute;top:0;left:0;width:360px;height:360px;overflow:hidden;pointer-events:none;z-index:0;}
-.lg-shapes .t1{position:absolute;top:-70px;left:-70px;width:260px;height:260px;background:linear-gradient(135deg,#1656d9,#4e8bea);clip-path:polygon(0 0,100% 0,0 100%);opacity:.95;}
-.lg-shapes .t2{position:absolute;top:55px;left:-95px;width:230px;height:230px;background:linear-gradient(135deg,#5c98ee,#a9cdf6);clip-path:polygon(0 0,100% 0,0 100%);opacity:.65;}
-.lg-shapes .t3{position:absolute;top:150px;left:-10px;width:190px;height:190px;background:linear-gradient(140deg,#22b371,#7fe0ab);clip-path:polygon(0 100%,100% 100%,0 0);opacity:.9;}
-.lg-dots{position:absolute;top:168px;left:68px;width:96px;height:64px;background-image:radial-gradient(#6f9bd4 1.6px, transparent 1.6px);background-size:15px 15px;opacity:.55;z-index:1;}
-
-.lg-skyline{position:absolute;left:0;bottom:0;width:64%;max-width:760px;z-index:0;pointer-events:none;opacity:.9;}
-.lg-skyline svg{width:100%;display:block;}
-
-#login-screen .lg-left{
-  position:relative;z-index:2;
-  flex:1.15;min-width:0;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:56px 5vw;
+.login-brand{
+  position:relative;
+  overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:56px 64px;
+  background:
+    radial-gradient(1100px 700px at -10% -10%, var(--navy-700) 0%, transparent 55%),
+    radial-gradient(900px 700px at 110% 110%, var(--navy-800) 0%, transparent 50%),
+    linear-gradient(160deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+  color:#eaf0f8;
 }
-.lg-logo-box{display:inline-flex;flex-direction:column;gap:2px;padding:16px 22px;background:rgba(255,255,255,.55);border-radius:12px;width:fit-content;margin-bottom:34px;}
-.lg-logo-box img{max-height:64px;max-width:320px;display:block;object-fit:contain;}
-.lg-logo-wordmark{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:34px;line-height:1;}
-.lg-logo-wordmark .p1{color:var(--lg-blue);}
-.lg-logo-wordmark .p2{color:var(--lg-green);}
-.lg-logo-globe{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 200deg,var(--lg-blue),var(--lg-green),var(--lg-blue));display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
-.lg-logo-globe svg{width:22px;height:22px;}
-.lg-logo-sub{font-size:11.5px;letter-spacing:.32em;color:var(--lg-blue);font-weight:700;margin-top:6px;}
-.lg-logo-tagline{font-size:12.5px;color:var(--lg-text-muted);font-weight:600;margin-top:8px;letter-spacing:.01em;}
-.lg-logo-divider{height:1px;background:linear-gradient(90deg,var(--lg-blue),transparent);margin:8px 0;}
-
-.lg-title{font-family:var(--font-display);font-weight:800;font-size:64px;line-height:1;color:var(--lg-text);margin:0;letter-spacing:-.01em;}
-.lg-subtitle{font-size:21px;font-weight:700;color:var(--lg-text);margin:6px 0 0;line-height:1.25;max-width:420px;}
-.lg-underline{width:64px;height:4px;border-radius:3px;background:var(--lg-green);margin:18px 0 30px;}
-
-.lg-features{display:flex;gap:34px;flex-wrap:wrap;}
-.lg-feature{display:flex;flex-direction:column;align-items:center;gap:8px;width:76px;}
-.lg-feature-icon{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--lg-blue);display:flex;align-items:center;justify-content:center;color:var(--lg-blue);background:rgba(255,255,255,.5);}
-.lg-feature-icon svg{width:22px;height:22px;}
-.lg-feature-label{font-size:12px;color:var(--lg-text-muted);font-weight:600;text-align:center;}
-
-#login-screen .lg-right{
-  position:relative;z-index:2;
-  flex:1;min-width:380px;max-width:520px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  padding:32px 40px;
+.login-brand::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(circle at 30% 30%, black, transparent 70%);
+  pointer-events:none;
 }
-.lg-card{
+.login-brand-top{position:relative;display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:44px;height:44px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold-400),var(--gold-500));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;color:var(--navy-950);font-size:19px;
+  flex-shrink:0;
+}
+.login-firm-name{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#a9bcd4;font-weight:600;}
+.login-brand-mid{position:relative;max-width:520px;margin-top:40px;}
+.login-brand-mid h1{
+  font-family:var(--font-display);
+  font-size:44px;line-height:1.1;font-weight:600;
+  margin:0 0 14px;
+  color:#f5f8fc;
+}
+.login-brand-mid .sub{font-size:16px;color:#b7c6da;line-height:1.55;margin:0 0 30px;}
+.login-taglines{display:flex;flex-direction:column;gap:10px;}
+.login-taglines span{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;color:#cfdaec;font-weight:500;
+}
+.login-taglines span::before{
+  content:"";width:7px;height:7px;border-radius:50%;
+  background:var(--gold-400);flex-shrink:0;
+}
+.login-brand-bottom{position:relative;display:flex;align-items:center;gap:10px;font-size:12px;color:#8397b3;}
+.login-brand-bottom .divider{width:1px;height:14px;background:#33455e;}
+
+.login-panel-wrap{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--surface-2);
+  padding:32px;
+}
+.login-card{
   width:100%;max-width:400px;
-  background:#fff;border-radius:22px;
-  box-shadow:0 20px 60px rgba(15,34,71,.16);
-  padding:34px 32px 28px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);
+  padding:36px 32px 30px;
 }
+.login-card h2{margin:0;font-size:21px;font-weight:800;color:var(--text);text-align:center;}
+.login-card p.hint{margin:5px 0 24px;color:var(--text-muted);font-size:13px;text-align:center;}
+
+/* ---- Tarjeta de acceso: avatar, campos con íconos, toggle de contraseña, botón degradado ---- */
 .lg-avatar-circle{
   width:56px;height:56px;border-radius:50%;background:#e7effc;
   display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--lg-blue);
 }
 .lg-avatar-circle svg{width:26px;height:26px;}
-.lg-card h2{margin:0;font-size:21px;font-weight:800;color:var(--lg-text);text-align:center;}
-.lg-card p.hint{margin:5px 0 24px;color:var(--lg-text-muted);font-size:13px;text-align:center;}
 
 .lg-field{margin-bottom:16px;}
-.lg-field label{display:block;font-size:12.5px;font-weight:700;color:var(--lg-text);margin-bottom:7px;}
+.lg-field label{display:block;font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:7px;}
 .lg-input-wrap{position:relative;display:flex;align-items:center;}
 .lg-input-wrap .lg-icon-left{position:absolute;left:13px;color:#93a3bd;display:flex;pointer-events:none;}
 .lg-input-wrap .lg-icon-left svg{width:16px;height:16px;}
 .lg-input-wrap input{
   width:100%;padding:11px 14px 11px 38px;
   border:1px solid var(--lg-border);border-radius:10px;
-  background:#fbfdff;color:var(--lg-text);font-size:13.5px;
+  background:#fbfdff;color:var(--text);font-size:13.5px;
   outline:none;transition:border-color .15s, box-shadow .15s;
 }
 .lg-input-wrap input:focus{border-color:var(--lg-blue);box-shadow:0 0 0 3px rgba(22,86,217,.12);background:#fff;}
@@ -156,7 +171,7 @@ a{color:inherit;}
 .lg-input-wrap .lg-eye-toggle:hover{color:var(--lg-blue);}
 
 .lg-row-between{display:flex;align-items:center;justify-content:space-between;margin:2px 0 20px;}
-.lg-check{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--lg-text-muted);font-weight:500;}
+.lg-check{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--text-muted);font-weight:500;}
 .lg-check input{width:15px;height:15px;accent-color:var(--lg-green);}
 .lg-forgot{background:none;border:none;color:var(--lg-blue);font-size:12.5px;font-weight:700;cursor:pointer;padding:0;}
 .lg-forgot:hover{text-decoration:underline;}
@@ -176,32 +191,19 @@ a{color:inherit;}
 .lg-divider-text::before,.lg-divider-text::after{content:"";flex:1;height:1px;background:var(--lg-border);}
 
 .lg-btn-ms{
-  width:100%;background:#fff;border:1px solid var(--lg-border);color:var(--lg-text);
+  width:100%;background:#fff;border:1px solid var(--lg-border);color:var(--text);
   display:flex;gap:11px;align-items:center;justify-content:center;padding:11px;border-radius:11px;cursor:pointer;
 }
 .lg-btn-ms:hover{background:#f7faff;}
 .lg-btn-ms .ms-txt{display:flex;flex-direction:column;align-items:flex-start;line-height:1.3;}
 .lg-btn-ms .ms-txt b{font-size:13px;font-weight:700;}
-.lg-btn-ms .ms-txt span{font-size:11px;color:var(--lg-text-muted);}
+.lg-btn-ms .ms-txt span{font-size:11px;color:var(--text-muted);}
 .ms-logo{width:18px;height:18px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.5px;flex-shrink:0;}
 .ms-logo i{display:block;}
 
-.lg-footer-logos{display:flex;gap:12px;margin-top:22px;}
-.lg-footer-logo-box{
-  flex:1;border:1px solid var(--lg-border);border-radius:10px;padding:9px 10px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:64px;
-  background:#fbfdff;
-}
-.lg-footer-logo-box img{max-height:34px;max-width:100%;object-fit:contain;}
-.lg-footer-logo-box .lg-fw{display:flex;align-items:center;gap:5px;font-family:var(--font-display);font-weight:700;font-size:15px;}
-.lg-footer-logo-box .lg-fw .p1{color:var(--lg-blue);}
-.lg-footer-logo-box .lg-fw .p2{color:var(--lg-green);}
-.lg-footer-logo-box .lg-fsub{font-size:8.5px;color:var(--lg-text-muted);font-weight:600;letter-spacing:.02em;}
-.lg-footer-logo-box .lg-fmember{font-size:8px;color:var(--lg-text-muted);font-weight:700;letter-spacing:.03em;margin-bottom:1px;}
-
-.lg-footer-legal{text-align:center;font-size:11.5px;color:var(--lg-text-muted);line-height:1.7;padding:0 12px;margin-top:18px;max-width:400px;}
-.lg-footer-legal .lg-fl-title{font-weight:700;color:var(--lg-text);}
-.lg-footer-legal .lg-fl-version{color:var(--lg-blue);font-weight:700;}
+.login-footer-logos{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border);}
+.login-footer-logos .logo-chip{font-size:11px;color:var(--text-faint);font-weight:600;letter-spacing:.03em;}
+.login-member{text-align:center;margin-top:10px;font-size:11px;color:var(--text-faint);}
 
 .login-error{
   display:none;background:var(--danger-bg);color:var(--danger);
@@ -215,12 +217,9 @@ a{color:inherit;}
 }
 .demo-hint b{font-family:var(--font-mono);}
 
-@media (max-width:900px){
-  #login-screen{flex-direction:column;overflow-y:auto;}
-  .lg-left{padding:36px 24px 10px !important;}
-  .lg-right{max-width:100%;padding:16px 24px 32px !important;}
-  .lg-title{font-size:44px;}
-  .lg-skyline{display:none;}
+@media (max-width:860px){
+  #login-screen{grid-template-columns:1fr;}
+  .login-brand{display:none;}
 }
 
 /* ============ CAMPOS Y BOTONES GLOBALES (reutilizados en toda la app) ============ */
@@ -513,93 +512,49 @@ td.actions-cell{white-space:nowrap;text-align:right;}
 
 <!-- ======================= LOGIN ======================= -->
 <div id="login-screen">
-  <div class="lg-shapes"><div class="t1"></div><div class="t2"></div><div class="t3"></div></div>
-  <div class="lg-dots"></div>
-  <div class="lg-skyline">
-    <svg viewBox="0 0 640 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3a6fc4" stop-opacity=".55"/>
-          <stop offset="100%" stop-color="#3a6fc4" stop-opacity=".12"/>
-        </linearGradient>
-      </defs>
-      <g fill="url(#skyFade)">
-        <rect x="0"   y="140" width="26" height="80"/>
-        <rect x="30"  y="110" width="20" height="110"/>
-        <rect x="54"  y="150" width="30" height="70"/>
-        <rect x="88"  y="90"  width="22" height="130"/>
-        <rect x="114" y="130" width="18" height="90"/>
-        <rect x="136" y="60"  width="24" height="160"/>
-        <rect x="164" y="120" width="26" height="100"/>
-        <rect x="194" y="95"  width="20" height="125"/>
-        <rect x="218" y="145" width="30" height="75"/>
-        <rect x="252" y="75"  width="22" height="145"/>
-        <rect x="278" y="115" width="18" height="105"/>
-        <rect x="300" y="40"  width="26" height="180"/>
-        <rect x="330" y="130" width="20" height="90"/>
-        <rect x="354" y="100" width="24" height="120"/>
-        <rect x="382" y="150" width="28" height="70"/>
-        <rect x="414" y="85"  width="20" height="135"/>
-        <rect x="438" y="125" width="22" height="95"/>
-        <rect x="464" y="105" width="18" height="115"/>
-        <rect x="486" y="155" width="26" height="65"/>
-        <rect x="516" y="95"  width="22" height="125"/>
-        <rect x="542" y="135" width="18" height="85"/>
-        <rect x="564" y="115" width="24" height="105"/>
-        <rect x="592" y="150" width="20" height="70"/>
-        <rect x="616" y="130" width="18" height="90"/>
-      </g>
-    </svg>
-  </div>
-
-  <div class="lg-left">
-    <div class="lg-logo-box" id="lgLogoPrincipalBox"><!-- inyectado por JS: imagen subida o wordmark de marca --></div>
-
-    <h1 class="lg-title">SIGA</h1>
-    <p class="lg-subtitle">Sistema Integral de Gestión de Auditorías</p>
-    <div class="lg-underline"></div>
-
-    <div class="lg-features">
-      <div class="lg-feature">
-        <div class="lg-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></div>
-        <div class="lg-feature-label">Seguro</div>
+  <div class="login-brand">
+    <div class="login-brand-top">
+      <div class="brand-mark" id="brandMarkLogin">S</div>
+      <div class="login-firm-name" id="loginFirmName">Firma Auditora Regional</div>
+    </div>
+    <div class="login-brand-mid">
+      <h1>SIGA</h1>
+      <p class="sub">Sistema Integral de Gestión de Auditorías. Plataforma corporativa para administrar de extremo a extremo auditorías financieras externas, multiempresa y multinacional.</p>
+      <div class="login-taglines">
+        <span>Seguro</span>
+        <span>Eficiente</span>
+        <span>Colaborativo</span>
+        <span>Confiable</span>
       </div>
-      <div class="lg-feature">
-        <div class="lg-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20V8"/></svg></div>
-        <div class="lg-feature-label">Eficiente</div>
-      </div>
-      <div class="lg-feature">
-        <div class="lg-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"/><circle cx="16" cy="9.5" r="2.3"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.5 14.2c2.6.4 4.5 2.6 4.5 5.3"/></svg></div>
-        <div class="lg-feature-label">Colaborativo</div>
-      </div>
-      <div class="lg-feature">
-        <div class="lg-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/><path d="M14 3v5h5"/><path d="M9.5 15.5l1.7 1.7L15 13.5"/></svg></div>
-        <div class="lg-feature-label">Confiable</div>
-      </div>
+    </div>
+    <div class="login-brand-bottom">
+      <span id="loginYearTag">© 2026 SIGA</span>
+      <span class="divider"></span>
+      <span>Motor normativo NIA/ISA · NIIF/IFRS · ISQM</span>
     </div>
   </div>
 
-  <div class="lg-right">
-    <div class="lg-card">
+  <div class="login-panel-wrap">
+    <div class="login-card">
       <div class="lg-avatar-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div>
       <h2>Iniciar sesión</h2>
-      <p class="hint">Ingrese sus credenciales para continuar.</p>
+      <p class="hint">Ingrese sus credenciales corporativas para acceder a SIGA.</p>
 
       <div class="login-error" id="loginError">Usuario o contraseña incorrectos.</div>
 
       <form id="loginForm">
         <div class="lg-field">
-          <label>Correo electrónico (usuario)</label>
+          <label>Usuario</label>
           <div class="lg-input-wrap">
             <span class="lg-icon-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg></span>
-            <input type="text" id="loginUser" autocomplete="username" placeholder="usuario@dominio.com" required>
+            <input type="text" id="loginUser" autocomplete="username" placeholder="usuario o correo" required>
           </div>
         </div>
         <div class="lg-field">
           <label>Contraseña</label>
           <div class="lg-input-wrap">
             <span class="lg-icon-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg></span>
-            <input type="password" id="loginPass" autocomplete="current-password" placeholder="Ingrese su contraseña" required>
+            <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••" required>
             <button type="button" class="lg-eye-toggle" id="pwToggleBtn" title="Mostrar/ocultar contraseña">
               <svg id="pwEyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
             </button>
@@ -607,7 +562,7 @@ td.actions-cell{white-space:nowrap;text-align:right;}
         </div>
         <div class="lg-row-between">
           <label class="lg-check"><input type="checkbox" id="loginRemember" checked> Recordar sesión</label>
-          <button type="button" class="lg-forgot" id="forgotBtn">¿Olvidó su contraseña?</button>
+          <button type="button" class="lg-forgot" id="forgotBtn">¿Olvidó contraseña?</button>
         </div>
         <button type="submit" id="loginSubmitBtn" class="lg-btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H6a2 2 0 00-2 2v14a2 2 0 002 2h7"/><path d="M17 8l4 4-4 4"/><path d="M21 12H9"/></svg>
@@ -621,16 +576,16 @@ td.actions-cell{white-space:nowrap;text-align:right;}
         <span class="ms-txt"><b>Continuar con Microsoft</b><span>Outlook / Microsoft 365</span></span>
       </button>
 
-      <div class="lg-footer-logos">
-        <div class="lg-footer-logo-box" id="lgFooterLogo1Box"></div>
-        <div class="lg-footer-logo-box" id="lgFooterLogo2Box"></div>
+      <div class="login-footer-logos">
+        <span class="logo-chip" id="loginLogoLocal">LOGO LOCAL</span>
+        <span class="logo-chip" id="loginLogoFirma">LOGO FIRMA</span>
       </div>
+      <div class="login-member">A member of <b id="loginNetworkName">SIGA Global Network</b></div>
 
       <div class="demo-hint">Usuario de prueba: <b>admin</b> · Contraseña: <b>Admin@2026Test</b></div>
       <button type="button" class="btn btn-secondary" id="quickLoginBtn" style="width:100%;margin-top:10px;">⚡ Entrar directo con el usuario de prueba</button>
       <div id="bootError" style="display:none;margin-top:14px;background:var(--danger-bg);color:var(--danger);border:1px solid #f0c6c6;border-radius:var(--radius);padding:10px 12px;font-size:11.5px;line-height:1.5;"></div>
     </div>
-    <div class="lg-footer-legal" id="lgFooterLegalWrap"></div>
   </div>
 </div>
 
@@ -845,13 +800,13 @@ function seedDB(){
     {id:oficinaId2, nombre:'Oficina Ciudad de México', paisId:paisId2, direccion:'CDMX, México', responsable:'Andrea Solís'},
   ];
 
+  const encargoId1 = uid('enc');
   const clienteId1 = uid('cli'), clienteId2 = uid('cli');
   const clientes = [
-    {id:clienteId1, nombre:'Comercializadora Andina, S.A.', idFiscal:'GT-1234567-8', paisId:paisId1, industria:'Comercial', estado:'Activo', contacto:'Marco Gil', email:'mgil@andina.com', telefono:'+502 2345 6789', firmaResponsable:firmaId, grupoEmpresarial:'Grupo Andina', informacionLegal:'Sociedad Anónima constituida en 2005.', notas:''},
-    {id:clienteId2, nombre:'Manufacturas del Istmo, S.A. de C.V.', idFiscal:'MX-9876543-2', paisId:paisId2, industria:'Manufactura', estado:'Activo', contacto:'Paola Núñez', email:'pnunez@istmo.mx', telefono:'+52 55 1234 5678', firmaResponsable:firmaId, grupoEmpresarial:'', informacionLegal:'Sociedad constituida en 2011.', notas:''}
+    {id:clienteId1, encargoId:encargoId1, nombre:'Comercializadora Andina, S.A.', idFiscal:'GT-1234567-8', paisId:paisId1, industria:'Comercial', estado:'Activo', contacto:'Marco Gil', email:'mgil@andina.com', telefono:'+502 2345 6789', firmaResponsable:firmaId, grupoEmpresarial:'Grupo Andina', informacionLegal:'Sociedad Anónima constituida en 2005.', notas:''},
+    {id:clienteId2, encargoId:encargoId1, nombre:'Manufacturas del Istmo, S.A. de C.V.', idFiscal:'MX-9876543-2', paisId:paisId2, industria:'Manufactura', estado:'Activo', contacto:'Paola Núñez', email:'pnunez@istmo.mx', telefono:'+52 55 1234 5678', firmaResponsable:firmaId, grupoEmpresarial:'', informacionLegal:'Sociedad constituida en 2011.', notas:''}
   ];
 
-  const encargoId1 = uid('enc');
   const areaEfectivoId = uid('area'), areaCxCId = uid('area');
   const visitaId1 = uid('vis'), visitaId2 = uid('vis');
   const ptId1 = uid('pt'), ptId2 = uid('pt');
@@ -861,7 +816,6 @@ function seedDB(){
 
   const encargos = [{
     id:encargoId1,
-    clienteId:clienteId1,
     nombre:'Auditoría Financiera Externa 2025',
     tipo:'Auditoría financiera externa',
     periodoFiscal:'2025-01-01 a 2025-12-31',
@@ -971,28 +925,14 @@ function seedDB(){
   return {
     version:1,
     config:{
-      nombreOrganizacion:'Auditaxes El Salvador',
+      nombreOrganizacion:'SIGA Global Network',
       colorPrimario:'#0e2440',
       colorAcento:'#c9a227',
+      logoFirmaTexto:'FIRMA',
+      logoLocalTexto:'LOCAL',
+      fondoLogin:'default',
       idiomaDefault:'Español',
-      monedaDefault:'USD',
-      /* Logo principal (panel izquierdo del login). Si logoPrincipalDataUrl está vacío,
-         se muestra una marca de texto configurable en su lugar. */
-      logoPrincipalDataUrl:'',
-      logoTextPart1:'Audi',
-      logoTextPart2:'taxes',
-      logoSubtext:'EL SALVADOR',
-      logoTagline:'Audit · Tax · Consulting · Outsourcing',
-      /* Logos de pie de la tarjeta de acceso (2 casillas configurables) */
-      logoPie1DataUrl:'',
-      logoPie2DataUrl:'',
-      logoPie2MemberPrefix:'A member of',
-      logoPie2Suffix:'INTERNATIONAL',
-      /* Texto legal del pie de la pantalla de acceso */
-      razonSocialLegal:'Audit & Tax Services, S.A. de C.V.',
-      derechosAutorNombre:'Gabriel Ernesto Barrera Pineda',
-      desarrolladoTexto:'Desarrollado con el apoyo de herramientas de inteligencia artificial.',
-      versionTexto:'0.2.3'
+      monedaDefault:'USD'
     },
     firmas, paises, oficinas, roles, usuarios, clientes, encargos, normativas, bitacora,
     session:null
@@ -1021,6 +961,7 @@ const getOficina = id => byId(DB.oficinas, id);
 const getFirma = id => byId(DB.firmas, id);
 const getCliente = id => byId(DB.clientes, id);
 const getEncargo = id => byId(DB.encargos, id);
+const getClientesByEncargo = encargoId => (DB.clientes||[]).filter(c=>c.encargoId===encargoId);
 const getArea = (enc, id) => byId(enc.areas, id);
 
 window.SIGA_DEBUG = {DB, resetDemo(){ Store.reset(); location.reload(); }};
@@ -1033,7 +974,7 @@ window.__SIGA_CORE__ = {
   AREAS_SUGERIDAS_CATALOGO, TIPOS_EVIDENCIA, NIVELES_REVISION, ESTADOS_REVISION, ESTADOS_AJUSTE,
   ESTADOS_HALLAZGO, ESTADOS_PT, TIPOS_INFORME, JURISDICCION_NORMA, NORMAS_BASE_TIPO, INDUSTRIAS,
   MONEDAS, IDIOMAS, METODOLOGIA_PASOS,
-  getUser, getUserName, getRol, getRolName, getPais, getPaisName, getOficina, getFirma, getCliente, getEncargo, getArea,
+  getUser, getUserName, getRol, getRolName, getPais, getPaisName, getOficina, getFirma, getCliente, getEncargo, getArea, getClientesByEncargo,
   seedDB
 };
 
@@ -1237,69 +1178,19 @@ const DBref = () => C.DB();
 const loginScreen = document.getElementById('login-screen');
 const appScreen = document.getElementById('app-screen');
 
-function globeSvg(){
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-6-3.8-9s1.3-6.5 3.8-9z"/></svg>`;
-}
-
-/* Genera el bloque de marca de texto (usado como respaldo cuando no hay logo subido) */
-function wordmarkHtml(cfg, opts){
-  opts = opts || {};
-  const size = opts.size || 'lg';
-  const sub = opts.showSub!==false ? `<div class="lg-logo-sub">${escapeHtml(cfg.logoSubtext||'')}</div>` : '';
-  const tagline = opts.showTagline ? `<div class="lg-logo-tagline">${escapeHtml(cfg.logoTagline||'')}</div>` : '';
-  const divider = opts.showTagline ? `<div class="lg-logo-divider"></div>` : '';
-  if(size==='sm'){
-    return `<div class="lg-fw"><span class="p1">${escapeHtml(cfg.logoTextPart1||'')}</span><span class="p2">${escapeHtml(cfg.logoTextPart2||'')}</span></div>
-      ${cfg.logoSubtext? `<div class="lg-fsub">${escapeHtml(cfg.logoSubtext)}</div>`:''}`;
-  }
-  return `<div class="lg-logo-wordmark">
-      <span class="p1">${escapeHtml(cfg.logoTextPart1||'')}</span><span class="p2">${escapeHtml(cfg.logoTextPart2||'')}</span>
-      <span class="lg-logo-globe">${globeSvg()}</span>
-    </div>
-    ${sub}${divider}${tagline}`;
-}
-
 function applyBranding(){
   const db = DBref();
   const cfg = db.config;
   document.documentElement.style.setProperty('--navy-900', cfg.colorPrimario || '#0e2440');
   document.documentElement.style.setProperty('--gold-500', cfg.colorAcento || '#c9a227');
+  const firma = db.firmas[0];
+  document.getElementById('loginFirmName').textContent = firma ? firma.nombre : cfg.nombreOrganizacion;
+  document.getElementById('loginNetworkName').textContent = cfg.nombreOrganizacion;
+  document.getElementById('loginLogoLocal').textContent = cfg.logoLocalTexto || 'LOGO LOCAL';
+  document.getElementById('loginLogoFirma').textContent = cfg.logoFirmaTexto || 'LOGO FIRMA';
+  document.getElementById('brandMarkLogin').textContent = (cfg.nombreOrganizacion||'S').charAt(0);
   document.getElementById('topbarBrandMark').textContent = (cfg.nombreOrganizacion||'S').charAt(0);
-
-  /* Logo principal (panel izquierdo) */
-  const logoPrincipalEl = document.getElementById('lgLogoPrincipalBox');
-  if(logoPrincipalEl){
-    logoPrincipalEl.innerHTML = cfg.logoPrincipalDataUrl
-      ? `<img src="${cfg.logoPrincipalDataUrl}" alt="Logo">`
-      : wordmarkHtml(cfg, {size:'lg', showSub:true, showTagline:true});
-  }
-
-  /* Logos de pie de la tarjeta de acceso */
-  const foot1 = document.getElementById('lgFooterLogo1Box');
-  if(foot1){
-    foot1.innerHTML = cfg.logoPie1DataUrl
-      ? `<img src="${cfg.logoPie1DataUrl}" alt="Logo">`
-      : wordmarkHtml(cfg, {size:'sm'});
-  }
-  const foot2 = document.getElementById('lgFooterLogo2Box');
-  if(foot2){
-    foot2.innerHTML = cfg.logoPie2DataUrl
-      ? `<img src="${cfg.logoPie2DataUrl}" alt="Logo">`
-      : `${cfg.logoPie2MemberPrefix? `<div class="lg-fmember">${escapeHtml(cfg.logoPie2MemberPrefix)}</div>`:''}${wordmarkHtml(cfg,{size:'sm', showSub:false})}${cfg.logoPie2Suffix? `<div class="lg-fsub">${escapeHtml(cfg.logoPie2Suffix)}</div>`:''}`;
-  }
-
-  /* Pie legal */
-  const legalEl = document.getElementById('lgFooterLegalWrap');
-  if(legalEl){
-    const year = new Date().getFullYear();
-    legalEl.innerHTML = `
-      <div class="lg-fl-title">SIGA — Sistema Integral de Gestión de Auditorías</div>
-      <div>© ${year} ${escapeHtml(cfg.razonSocialLegal||'')}. Todos los derechos reservados.</div>
-      ${cfg.derechosAutorNombre? `<div>Derechos de autor: ${escapeHtml(cfg.derechosAutorNombre)}</div>`:''}
-      ${cfg.desarrolladoTexto? `<div>${escapeHtml(cfg.desarrolladoTexto)}</div>`:''}
-      ${cfg.versionTexto? `<div class="lg-fl-version">Versión ${escapeHtml(cfg.versionTexto)}</div>`:''}
-    `;
-  }
+  document.getElementById('loginYearTag').textContent = '© ' + new Date().getFullYear() + ' ' + (firma?firma.nombre:'SIGA');
 }
 
 function showBootError(err){
@@ -1626,7 +1517,10 @@ Views.dashboard = function(){
   const proximasVisitas = [];
   db.encargos.forEach(e=>{
     (e.visitas||[]).forEach(v=>{
-      if(v.fecha >= C.todayStr()){ proximasVisitas.push({...v, encargoNombre:e.nombre, clienteNombre:C.getCliente(e.clienteId)?.nombre}); }
+      if(v.fecha >= C.todayStr()){
+        const clientesEnc = C.getClientesByEncargo(e.id);
+        proximasVisitas.push({...v, encargoNombre:e.nombre, clienteNombre: clientesEnc.map(c=>c.nombre).join(', ') || '—'});
+      }
     });
   });
   proximasVisitas.sort((a,b)=> a.fecha.localeCompare(b.fecha));
@@ -1680,7 +1574,7 @@ Views.dashboard = function(){
   document.getElementById('dashEncargosTableWrap').innerHTML = UI.renderTable({
     columns:[
       {label:'Encargo', render:r=>`<b>${escapeHtml(r.nombre)}</b>`},
-      {label:'Cliente', render:r=>escapeHtml(C.getCliente(r.clienteId)?.nombre||'—')},
+      {label:'Cliente(s)', render:r=>{ const cs=C.getClientesByEncargo(r.id); return cs.length? escapeHtml(cs.map(c=>c.nombre).join(', ')) : '<span style="color:var(--text-faint);">Sin clientes vinculados</span>'; }},
       {label:'País', render:r=>escapeHtml(C.getPaisName(r.paisId))},
       {label:'Tipo', key:'tipo'},
       {label:'Estado', render:r=>UI.badge(r.estado)},
@@ -1699,7 +1593,7 @@ Views.clientes = function(){
   mainContentEl.innerHTML = `
   <div class="page-wrap">
     <div class="page-header">
-      <div><h1>Gestión de Clientes</h1><p class="desc">Administración de clientes, grupos económicos, partes relacionadas e información general por cliente.</p></div>
+      <div><h1>Gestión de Clientes</h1><p class="desc">Cada cliente se vincula a un encargo de auditoría existente. Administración de clientes, grupos económicos, partes relacionadas e información general por cliente.</p></div>
       <div class="page-actions"><button class="btn btn-gold" id="newClienteBtn">+ Crear cliente</button></div>
     </div>
     <div class="card"><div class="card-body pad0" id="clientesTableWrap"></div></div>
@@ -1713,12 +1607,12 @@ Views.clientes = function(){
         {label:'País', render:r=>escapeHtml(C.getPaisName(r.paisId))},
         {label:'Industria', key:'industria'},
         {label:'Contacto', render:r=>`${escapeHtml(r.contacto)}<br><span style="color:var(--text-muted);font-size:11.5px;">${escapeHtml(r.email)}</span>`},
-        {label:'Encargos', render:r=> db.encargos.filter(e=>e.clienteId===r.id).length},
+        {label:'Encargo vinculado', render:r=>{ const e=C.getEncargo(r.encargoId); return e? escapeHtml(e.nombre) : '<span style="color:var(--danger);">Sin encargo</span>'; }},
         {label:'Estado', render:r=>UI.badge(r.estado)},
       ],
       rows,
       actions:(r)=>`<button class="btn btn-ghost btn-sm" data-stop data-editcli="${r.id}">Editar</button>`,
-      emptyIcon:'🏢', emptyTitle:'Sin clientes registrados', emptyDesc:'Cree el primer cliente para comenzar a administrar encargos de auditoría.'
+      emptyIcon:'🏢', emptyTitle:'Sin clientes registrados', emptyDesc:'Cree primero un encargo, y luego cree el cliente vinculado a ese encargo.'
     });
     UI.wireRowClicks(document.getElementById('clientesTableWrap'), rows, (r)=> Views.clienteDetail(r.id));
     document.querySelectorAll('[data-editcli]').forEach(b=> b.addEventListener('click', (e)=>{ e.stopPropagation(); Modules.openClienteForm(b.getAttribute('data-editcli'), paint); }));
@@ -1732,7 +1626,7 @@ Views.clienteDetail = function(clienteId){
   const cliente = C.getCliente(clienteId);
   if(!cliente){ Router.go('clientes'); return; }
   window.setBreadcrumbGlobal([{label:'SIGA', strong:true}, {label:'Clientes'}, {label:cliente.nombre, strong:true}]);
-  const encargosCliente = db.encargos.filter(e=>e.clienteId===clienteId);
+  const encargoVinculado = cliente.encargoId ? C.getEncargo(cliente.encargoId) : null;
 
   mainContentEl.innerHTML = `
   <div class="page-wrap">
@@ -1744,7 +1638,7 @@ Views.clienteDetail = function(clienteId){
       </div>
       <div class="page-actions">
         <button class="btn btn-secondary" id="editClienteBtn2">Editar cliente</button>
-        <button class="btn btn-gold" id="newEncargoForClientBtn">+ Nuevo encargo</button>
+        ${encargoVinculado? `<button class="btn btn-gold" id="goToEncargoBtn">Ir al encargo →</button>` : ''}
       </div>
     </div>
 
@@ -1768,26 +1662,29 @@ Views.clienteDetail = function(clienteId){
     </div>
 
     <div class="card">
-      <div class="card-head"><div><h3>Encargos</h3><p>Encargos de auditoría asociados a este cliente</p></div></div>
-      <div class="card-body pad0" id="cliEncargosWrap"></div>
+      <div class="card-head"><div><h3>Encargo vinculado</h3><p>Encargo de auditoría al que pertenece este cliente</p></div></div>
+      <div class="card-body" id="cliEncargoWrap"></div>
     </div>
   </div>`;
 
   document.getElementById('backToClientes').addEventListener('click', ()=>Router.go('clientes'));
   document.getElementById('editClienteBtn2').addEventListener('click', ()=> Modules.openClienteForm(clienteId, ()=>Views.clienteDetail(clienteId)));
-  document.getElementById('newEncargoForClientBtn').addEventListener('click', ()=> Modules.openEncargoForm(null, clienteId));
+  const goBtn = document.getElementById('goToEncargoBtn');
+  if(goBtn) goBtn.addEventListener('click', ()=> Router.go('encargo-workspace', {encargoId:encargoVinculado.id, tab:'info'}));
 
-  document.getElementById('cliEncargosWrap').innerHTML = UI.renderTable({
-    columns:[
-      {label:'Encargo', render:r=>`<b>${escapeHtml(r.nombre)}</b>`},
-      {label:'Tipo', key:'tipo'},
-      {label:'Período', key:'periodoFiscal'},
-      {label:'Estado', render:r=>UI.badge(r.estado)},
-    ],
-    rows:encargosCliente, actions:()=>'',
-    emptyIcon:'📁', emptyTitle:'Sin encargos', emptyDesc:'Este cliente aún no tiene encargos de auditoría creados.'
-  });
-  UI.wireRowClicks(document.getElementById('cliEncargosWrap'), encargosCliente, (r)=>Router.go('encargo-workspace', {encargoId:r.id, tab:'info'}));
+  const cliEncargoWrap = document.getElementById('cliEncargoWrap');
+  if(encargoVinculado){
+    cliEncargoWrap.innerHTML = `
+      <div class="detail-list">
+        <div class="dl-row"><div class="dl-key">Encargo</div><div class="dl-val"><b>${escapeHtml(encargoVinculado.nombre)}</b></div></div>
+        <div class="dl-row"><div class="dl-key">Tipo</div><div class="dl-val">${escapeHtml(encargoVinculado.tipo)}</div></div>
+        <div class="dl-row"><div class="dl-key">Período</div><div class="dl-val">${escapeHtml(encargoVinculado.periodoFiscal)}</div></div>
+        <div class="dl-row"><div class="dl-key">Estado</div><div class="dl-val">${UI.badge(encargoVinculado.estado)}</div></div>
+        <div class="dl-row"><div class="dl-key">Otros clientes en este encargo</div><div class="dl-val">${(()=>{ const otros=C.getClientesByEncargo(encargoVinculado.id).filter(c=>c.id!==clienteId); return otros.length? escapeHtml(otros.map(c=>c.nombre).join(', ')) : 'Ninguno'; })()}</div></div>
+      </div>`;
+  } else {
+    cliEncargoWrap.innerHTML = `<div class="empty-state"><div class="es-icon">📁</div><h4>Sin encargo vinculado</h4><p>Este cliente no está vinculado a ningún encargo. Edite el cliente para asignarle uno.</p></div>`;
+  }
 
   const normAplicable = Modules.calcularNormativaAplicable({paisId:cliente.paisId, industria:cliente.industria, tipoEncargo:null});
   document.getElementById('cliNormativaWrap').innerHTML = UI.renderTable({
@@ -1813,11 +1710,18 @@ const DBref = () => C.DB();
 const Modules = window.Modules = window.Modules || {};
 
 /* ---------- CLIENTE FORM ---------- */
-Modules.openClienteForm = function(clienteId, onDone){
+Modules.openClienteForm = function(clienteId, onDone, presetEncargoId){
   const db = DBref();
   const editing = clienteId ? C.getCliente(clienteId) : null;
+
+  if(!editing && db.encargos.length===0){
+    toast('Primero debe crear un encargo. El cliente se vincula a un encargo existente.', 'error');
+    return;
+  }
+
   const schema = [
     {key:'nombre', label:'Nombre / Razón social', required:true, span:'full'},
+    {key:'encargoId', label:'Encargo vinculado', type:'select', required:true, options:()=>db.encargos.map(e=>({value:e.id,label:e.nombre})), hint:'El cliente se crea y se enlaza directamente a este encargo.'},
     {key:'idFiscal', label:'Identificación fiscal', required:true},
     {key:'paisId', label:'País', type:'select', required:true, options:()=>db.paises.map(p=>({value:p.id,label:p.nombre}))},
     {key:'industria', label:'Industria', type:'select', required:true, options:C.INDUSTRIAS},
@@ -1832,8 +1736,8 @@ Modules.openClienteForm = function(clienteId, onDone){
   ];
   UI.formModal({
     title: editing? 'Editar cliente' : 'Crear cliente',
-    subtitle: 'Información general del cliente',
-    schema, values: editing||{estado:'En configuración'},
+    subtitle: 'El cliente se enlaza a un encargo de auditoría existente',
+    schema, values: editing || {estado:'En configuración', encargoId:presetEncargoId||''},
     submitLabel: editing? 'Guardar cambios' : 'Crear cliente',
     onSubmit(vals){
       if(editing){
@@ -1843,8 +1747,8 @@ Modules.openClienteForm = function(clienteId, onDone){
       } else {
         const nuevo = {id:uid('cli'), ...vals};
         db.clientes.push(nuevo);
-        logAction('Creó cliente', vals.nombre);
-        toast('Cliente creado correctamente.', 'success');
+        logAction('Creó cliente', vals.nombre + ' → vinculado a encargo');
+        toast('Cliente creado y vinculado al encargo correctamente.', 'success');
       }
       saveDB();
       UI.closeModal();
@@ -1854,12 +1758,11 @@ Modules.openClienteForm = function(clienteId, onDone){
 };
 
 /* ---------- ENCARGO FORM ---------- */
-Modules.openEncargoForm = function(encargoId, presetClienteId){
+Modules.openEncargoForm = function(encargoId){
   const db = DBref();
   const editing = encargoId ? C.getEncargo(encargoId) : null;
   const schema = [
     {key:'nombre', label:'Nombre del encargo', required:true, span:'full', placeholder:'Ej. Auditoría Financiera Externa 2026'},
-    {key:'clienteId', label:'Cliente', type:'select', required:true, options:()=>db.clientes.map(c=>({value:c.id,label:c.nombre}))},
     {key:'tipo', label:'Tipo de encargo', type:'select', required:true, options:C.TIPOS_ENCARGO},
     {key:'periodoFiscal', label:'Período fiscal', required:true, placeholder:'2026-01-01 a 2026-12-31'},
     {key:'paisId', label:'País', type:'select', required:true, options:()=>db.paises.map(p=>({value:p.id,label:p.nombre}))},
@@ -1873,8 +1776,8 @@ Modules.openEncargoForm = function(encargoId, presetClienteId){
   ];
   UI.formModal({
     title: editing? 'Editar encargo' : 'Crear encargo',
-    subtitle:'Configuración inicial del encargo de auditoría',
-    schema, values: editing || {clienteId:presetClienteId||'', estado:'Planificación', moneda:'USD'},
+    subtitle: editing? 'Configuración del encargo de auditoría' : 'Una vez creado, podrá crear y vincular clientes a este encargo.',
+    schema, values: editing || {estado:'Planificación', moneda:'USD'},
     submitLabel: editing? 'Guardar cambios' : 'Crear encargo',
     onSubmit(vals){
       if(editing){
@@ -1893,7 +1796,7 @@ Modules.openEncargoForm = function(encargoId, presetClienteId){
         };
         db.encargos.push(nuevo);
         logAction('Creó encargo', vals.nombre);
-        toast('Encargo creado correctamente.', 'success');
+        toast('Encargo creado correctamente. Ahora puede crear clientes y vincularlos a este encargo.', 'success');
         saveDB(); UI.closeModal();
         Router.go('encargo-workspace', {encargoId:nuevo.id, tab:'info'});
       }
@@ -1952,7 +1855,7 @@ Views.encargos = function(){
     document.getElementById('encargosTableWrap').innerHTML = UI.renderTable({
       columns:[
         {label:'Encargo', render:r=>`<b>${escapeHtml(r.nombre)}</b><br><span class="tag-mono">${escapeHtml(r.periodoFiscal)}</span>`},
-        {label:'Cliente', render:r=>escapeHtml(C.getCliente(r.clienteId)?.nombre||'—')},
+        {label:'Cliente(s)', render:r=>{ const cs=C.getClientesByEncargo(r.id); return cs.length? escapeHtml(cs.map(c=>c.nombre).join(', ')) : '<span style="color:var(--text-faint);">Sin clientes</span>'; }},
         {label:'País', render:r=>escapeHtml(C.getPaisName(r.paisId))},
         {label:'Tipo', key:'tipo'},
         {label:'Áreas', render:r=> `${r.areas.filter(a=>a.estado==='Completado'||a.estado==='Revisado').length}/${r.areas.length||0}`},
@@ -1998,14 +1901,15 @@ Views['encargo-workspace'] = function(params){
   const db = DBref();
   const enc = C.getEncargo(params.encargoId);
   if(!enc){ Router.go('encargos'); return; }
-  const cliente = C.getCliente(enc.clienteId);
+  const clientesEnc = C.getClientesByEncargo(enc.id);
+  const clientesResumen = clientesEnc.length? clientesEnc.map(c=>c.nombre).join(', ') : 'Sin clientes vinculados';
   const tab = params.tab || 'info';
 
   window.setBreadcrumbGlobal([
     {label:'SIGA', strong:true},
     {label:C.getFirma(enc.firmaId)?.nombre||'Firma'},
     {label:C.getPaisName(enc.paisId)},
-    {label:cliente?.nombre||'Cliente'},
+    {label: clientesEnc.length===1? clientesEnc[0].nombre : (clientesEnc.length>1? `${clientesEnc.length} clientes` : 'Sin clientes')},
     {label:enc.nombre, strong:true}
   ]);
 
@@ -2018,7 +1922,7 @@ Views['encargo-workspace'] = function(params){
         <div>
           <div style="margin-bottom:6px;"><button class="btn btn-ghost btn-sm" id="backToEncargos">← Encargos</button></div>
           <h1 style="font-size:22px;">${escapeHtml(enc.nombre)}</h1>
-          <p class="desc">${escapeHtml(cliente?.nombre||'')} · ${escapeHtml(enc.tipo)} · ${escapeHtml(enc.periodoFiscal)} ${UI.badge(enc.estado)}</p>
+          <p class="desc">${escapeHtml(clientesResumen)} · ${escapeHtml(enc.tipo)} · ${escapeHtml(enc.periodoFiscal)} ${UI.badge(enc.estado)}</p>
         </div>
       </div>
       <div id="encTabContent"></div>
@@ -2040,14 +1944,12 @@ const TAB = window.__ENCARGO_TAB_RENDERERS__;
 
 /* ---------------- TAB: INFORMACIÓN GENERAL ---------------- */
 TAB.info = function(enc, holder){
-  const cliente = C.getCliente(enc.clienteId);
   holder.innerHTML = `
     <div class="grid-2">
       <div class="card">
         <div class="card-head"><h3>Datos generales</h3><button class="btn btn-ghost btn-sm" id="editEncBtn">Editar</button></div>
         <div class="card-body">
           <div class="detail-list">
-            <div class="dl-row"><div class="dl-key">Cliente</div><div class="dl-val">${escapeHtml(cliente?.nombre||'—')}</div></div>
             <div class="dl-row"><div class="dl-key">Tipo de encargo</div><div class="dl-val">${escapeHtml(enc.tipo)}</div></div>
             <div class="dl-row"><div class="dl-key">Período fiscal</div><div class="dl-val">${escapeHtml(enc.periodoFiscal)}</div></div>
             <div class="dl-row"><div class="dl-key">País / Firma</div><div class="dl-val">${escapeHtml(C.getPaisName(enc.paisId))} · ${escapeHtml(C.getFirma(enc.firmaId)?.nombre||'—')}</div></div>
@@ -2074,8 +1976,37 @@ TAB.info = function(enc, holder){
         </div>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div><h3>Clientes vinculados</h3><p>Clientes creados y enlazados a este encargo. Cada cliente nuevo se vincula aquí al crearse.</p></div>
+        <button class="btn btn-gold btn-sm" id="addClienteToEncBtn">+ Crear cliente vinculado</button>
+      </div>
+      <div class="card-body pad0" id="encClientesWrap"></div>
+    </div>
   `;
   document.getElementById('editEncBtn').addEventListener('click', ()=> Modules.openEncargoForm(enc.id));
+  document.getElementById('addClienteToEncBtn').addEventListener('click', ()=> Modules.openClienteForm(null, ()=>Router.refresh(), enc.id));
+  paintClientesEnc();
+
+  function paintClientesEnc(){
+    const clientesEnc = C.getClientesByEncargo(enc.id);
+    const wrap = document.getElementById('encClientesWrap');
+    wrap.innerHTML = UI.renderTable({
+      columns:[
+        {label:'Cliente', render:r=>`<b>${escapeHtml(r.nombre)}</b><br><span class="tag-mono">${escapeHtml(r.idFiscal)}</span>`},
+        {label:'País', render:r=>escapeHtml(C.getPaisName(r.paisId))},
+        {label:'Industria', key:'industria'},
+        {label:'Contacto', render:r=>`${escapeHtml(r.contacto||'—')}<br><span style="color:var(--text-muted);font-size:11.5px;">${escapeHtml(r.email||'')}</span>`},
+        {label:'Estado', render:r=>UI.badge(r.estado)},
+      ],
+      rows: clientesEnc,
+      actions:(r)=>`<button class="btn btn-ghost btn-sm" data-stop data-editcli="${r.id}">Editar</button> <button class="btn btn-ghost btn-sm" data-stop data-viewcli="${r.id}">Ver ficha</button>`,
+      emptyIcon:'🏢', emptyTitle:'Sin clientes vinculados', emptyDesc:'Cree un cliente y vincúlelo a este encargo con el botón "+ Crear cliente vinculado".'
+    });
+    wrap.querySelectorAll('[data-editcli]').forEach(b=> b.addEventListener('click', ()=> Modules.openClienteForm(b.getAttribute('data-editcli'), paintClientesEnc)));
+    wrap.querySelectorAll('[data-viewcli]').forEach(b=> b.addEventListener('click', ()=> Views.clienteDetail(b.getAttribute('data-viewcli'))));
+  }
 };
 
 /* ---------------- TAB: PLANIFICACIÓN Y MATERIALIDAD ---------------- */
@@ -3165,41 +3096,29 @@ Views['config-organizacion'] = function(){
   crumbConfig('Organización e Identidad');
   const db = DBref();
   mainContentEl.innerHTML = `<div class="page-wrap">
-    ${configHeader('Organización e Identidad Corporativa', 'Configuración global de marca, logos y textos legales de la pantalla de acceso. Todo es configurable desde aquí, sin tocar código.')}
+    ${configHeader('Organización e Identidad Corporativa', 'Configuración global de marca, colores, logos y parámetros de la organización. No requiere modificar código: todo es configurable.')}
     <div class="grid-2">
       <div class="card">
         <div class="card-head"><h3>Datos de la organización</h3></div>
         <div class="card-body" id="orgFormWrap"></div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>Colores corporativos</h3><p>Aplican al panel principal (una vez iniciada la sesión)</p></div>
-        <div class="card-body" id="colorFormWrap"></div>
+        <div class="card-head"><h3>Identidad visual</h3><p>Colores corporativos y textos de logo (login y topbar)</p></div>
+        <div class="card-body" id="brandFormWrap"></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-head"><div><h3>Logo principal</h3><p>Aparece en el panel izquierdo de la pantalla de acceso</p></div></div>
-      <div class="card-body" id="logoPrincipalWrap"></div>
-    </div>
-
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-head"><div><h3>Logo de pie #1</h3><p>Primera casilla bajo el botón de Microsoft</p></div></div>
-        <div class="card-body" id="logoPie1Wrap"></div>
+      <div class="card-head"><h3>Vista previa del login</h3></div>
+      <div class="card-body" style="background:var(--surface-2);">
+        <div style="max-width:360px;padding:20px;border-radius:12px;background:linear-gradient(160deg, var(--navy-950), var(--navy-800));color:#fff;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><div class="brand-mark" style="width:30px;height:30px;font-size:13px;">${escapeHtml((db.config.nombreOrganizacion||'S').charAt(0))}</div><span style="font-size:13px;color:#a9bcd4;">${escapeHtml(db.firmas[0]?.nombre||'')}</span></div>
+          <div style="font-family:var(--font-display);font-size:26px;">SIGA</div>
+          <div style="font-size:12px;color:#b7c6da;margin-top:6px;">Sistema Integral de Gestión de Auditorías</div>
+        </div>
       </div>
-      <div class="card">
-        <div class="card-head"><div><h3>Logo de pie #2</h3><p>Segunda casilla — ej. "A member of..."</p></div></div>
-        <div class="card-body" id="logoPie2Wrap"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-head"><h3>Textos legales del pie de página</h3></div>
-      <div class="card-body" id="legalFormWrap"></div>
     </div>
   </div>`;
 
-  /* ---- Datos de la organización ---- */
   document.getElementById('orgFormWrap').innerHTML = `
     <div class="field"><label>Nombre de la organización / red</label><input id="orgNombre" value="${escapeHtml(db.config.nombreOrganizacion)}"></div>
     <div class="field"><label>Idioma predeterminado</label><select id="orgIdioma">${C.IDIOMAS.map(i=>`<option ${db.config.idiomaDefault===i?'selected':''}>${i}</option>`).join('')}</select></div>
@@ -3211,123 +3130,30 @@ Views['config-organizacion'] = function(){
     db.config.idiomaDefault = document.getElementById('orgIdioma').value;
     db.config.monedaDefault = document.getElementById('orgMoneda').value;
     logAction('Actualizó configuración de organización');
-    saveDB(); toast('Organización actualizada.','success'); window.__SIGA_APP__.applyBranding(); Router.refresh();
+    saveDB(); toast('Organización actualizada.','success'); Router.refresh();
   });
 
-  /* ---- Colores ---- */
-  document.getElementById('colorFormWrap').innerHTML = `
+  document.getElementById('brandFormWrap').innerHTML = `
     <div class="grid-2">
-      <div class="field"><label>Color primario (navy — panel principal)</label><input type="color" id="colorPrim" value="${db.config.colorPrimario}" style="height:40px;padding:4px;"></div>
-      <div class="field"><label>Color de acento (gold — panel principal)</label><input type="color" id="colorAcc" value="${db.config.colorAcento}" style="height:40px;padding:4px;"></div>
+      <div class="field"><label>Color primario (navy)</label><input type="color" id="colorPrim" value="${db.config.colorPrimario}" style="height:40px;padding:4px;"></div>
+      <div class="field"><label>Color de acento (gold)</label><input type="color" id="colorAcc" value="${db.config.colorAcento}" style="height:40px;padding:4px;"></div>
     </div>
-    <button class="btn btn-gold btn-sm" id="saveColorBtn">Guardar colores</button>
+    <div class="field"><label>Texto "Logo firma" (login)</label><input id="logoFirmaTxt" value="${escapeHtml(db.config.logoFirmaTexto)}"></div>
+    <div class="field"><label>Texto "Logo local" (login)</label><input id="logoLocalTxt" value="${escapeHtml(db.config.logoLocalTexto)}"></div>
+    <div class="field-hint" style="margin-bottom:10px;">En producción, estos campos aceptarían la carga de archivos de imagen (logo principal, secundario, internacional, favicon, fondo de login) por firma y por país, almacenados en el módulo de Assets sin necesidad de desplegar código nuevo.</div>
+    <button class="btn btn-gold btn-sm" id="saveBrandBtn">Guardar identidad</button>
   `;
-  document.getElementById('saveColorBtn').addEventListener('click', ()=>{
+  document.getElementById('saveBrandBtn').addEventListener('click', ()=>{
     db.config.colorPrimario = document.getElementById('colorPrim').value;
     db.config.colorAcento = document.getElementById('colorAcc').value;
-    logAction('Actualizó colores corporativos');
-    saveDB(); toast('Colores actualizados.','success');
+    db.config.logoFirmaTexto = document.getElementById('logoFirmaTxt').value;
+    db.config.logoLocalTexto = document.getElementById('logoLocalTxt').value;
+    logAction('Actualizó identidad corporativa');
+    saveDB(); toast('Identidad corporativa actualizada.','success');
     document.documentElement.style.setProperty('--navy-900', db.config.colorPrimario);
     document.documentElement.style.setProperty('--gold-500', db.config.colorAcento);
+    Router.refresh();
   });
-
-  /* ---- Bloques de logo (subida + fallback de texto) ---- */
-  renderLogoUploader({
-    wrapId:'logoPrincipalWrap', dataUrlKey:'logoPrincipalDataUrl',
-    extraFields:[
-      {key:'logoTextPart1', label:'Texto marca — parte 1 (azul)'},
-      {key:'logoTextPart2', label:'Texto marca — parte 2 (verde)'},
-      {key:'logoSubtext', label:'Subtítulo (ej. país / sede)'},
-      {key:'logoTagline', label:'Lema / tagline'},
-    ]
-  });
-  renderLogoUploader({
-    wrapId:'logoPie1Wrap', dataUrlKey:'logoPie1DataUrl',
-    extraFields:[]
-  });
-  renderLogoUploader({
-    wrapId:'logoPie2Wrap', dataUrlKey:'logoPie2DataUrl',
-    extraFields:[
-      {key:'logoPie2MemberPrefix', label:'Texto superior (ej. "A member of")'},
-      {key:'logoPie2Suffix', label:'Texto inferior (ej. "INTERNATIONAL")'},
-    ]
-  });
-
-  /* ---- Textos legales ---- */
-  document.getElementById('legalFormWrap').innerHTML = `
-    <div class="form-grid">
-      <div class="field full"><label>Razón social (para el copyright)</label><input id="razonSocialLegal" value="${escapeHtml(db.config.razonSocialLegal||'')}"></div>
-      <div class="field"><label>Derechos de autor — nombre</label><input id="derechosAutorNombre" value="${escapeHtml(db.config.derechosAutorNombre||'')}"></div>
-      <div class="field"><label>Versión del sistema</label><input id="versionTexto" value="${escapeHtml(db.config.versionTexto||'')}"></div>
-      <div class="field full"><label>Texto adicional (ej. crédito de desarrollo)</label><input id="desarrolladoTexto" value="${escapeHtml(db.config.desarrolladoTexto||'')}"></div>
-    </div>
-    <button class="btn btn-gold btn-sm" id="saveLegalBtn">Guardar textos legales</button>
-  `;
-  document.getElementById('saveLegalBtn').addEventListener('click', ()=>{
-    db.config.razonSocialLegal = document.getElementById('razonSocialLegal').value;
-    db.config.derechosAutorNombre = document.getElementById('derechosAutorNombre').value;
-    db.config.versionTexto = document.getElementById('versionTexto').value;
-    db.config.desarrolladoTexto = document.getElementById('desarrolladoTexto').value;
-    logAction('Actualizó textos legales del login');
-    saveDB(); toast('Textos legales actualizados.','success'); window.__SIGA_APP__.applyBranding();
-  });
-
-  /* Renderiza un bloque de subida de logo con vista previa + campos de texto de respaldo */
-  function renderLogoUploader({wrapId, dataUrlKey, extraFields}){
-    const wrap = document.getElementById(wrapId);
-    function paint(){
-      const current = db.config[dataUrlKey];
-      wrap.innerHTML = `
-        <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;">
-          <div style="width:160px;height:100px;border:1px dashed var(--border-strong);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--surface-2);flex-shrink:0;">
-            ${current? `<img src="${current}" style="max-width:100%;max-height:100%;object-fit:contain;">` : `<span style="font-size:11px;color:var(--text-faint);text-align:center;padding:6px;">Sin logo subido<br>(se usa el texto de marca)</span>`}
-          </div>
-          <div style="flex:1;min-width:220px;">
-            <input type="file" accept="image/*" id="${wrapId}_file" style="margin-bottom:8px;">
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-secondary btn-sm" id="${wrapId}_upload">Subir imagen</button>
-              ${current? `<button class="btn btn-danger-ghost btn-sm" id="${wrapId}_remove">Quitar logo</button>`:''}
-            </div>
-            <div class="field-hint">Formatos PNG/JPG/SVG. Se recomienda fondo transparente. Se guarda localmente en este navegador.</div>
-          </div>
-        </div>
-        ${(extraFields&&extraFields.length)? `<div class="form-grid" style="margin-top:16px;">
-          ${extraFields.map(f=>`<div class="field"><label>${escapeHtml(f.label)}</label><input data-extrafield="${f.key}" value="${escapeHtml(db.config[f.key]||'')}"></div>`).join('')}
-        </div>
-        <button class="btn btn-gold btn-sm" id="${wrapId}_saveTextos" style="margin-top:4px;">Guardar textos de marca</button>` : ''}
-      `;
-      const fileInput = document.getElementById(wrapId+'_file');
-      document.getElementById(wrapId+'_upload').addEventListener('click', ()=>{
-        if(!fileInput.files || !fileInput.files[0]){ toast('Seleccione un archivo de imagen primero.','error'); return; }
-        const file = fileInput.files[0];
-        if(file.size > 1.5*1024*1024){ toast('La imagen es muy grande (máx. ~1.5MB en este prototipo).','error'); return; }
-        const reader = new FileReader();
-        reader.onload = ()=>{
-          db.config[dataUrlKey] = reader.result;
-          logAction('Actualizó logo', wrapId);
-          saveDB(); toast('Logo actualizado.','success'); window.__SIGA_APP__.applyBranding(); paint();
-        };
-        reader.onerror = ()=>{ toast('No se pudo leer el archivo.','error'); };
-        reader.readAsDataURL(file);
-      });
-      const removeBtn = document.getElementById(wrapId+'_remove');
-      if(removeBtn){
-        removeBtn.addEventListener('click', ()=>{
-          db.config[dataUrlKey] = '';
-          saveDB(); toast('Logo removido. Se muestra el texto de marca.','success'); window.__SIGA_APP__.applyBranding(); paint();
-        });
-      }
-      const saveTextosBtn = document.getElementById(wrapId+'_saveTextos');
-      if(saveTextosBtn){
-        saveTextosBtn.addEventListener('click', ()=>{
-          wrap.querySelectorAll('[data-extrafield]').forEach(inp=>{ db.config[inp.getAttribute('data-extrafield')] = inp.value; });
-          logAction('Actualizó textos de marca', wrapId);
-          saveDB(); toast('Textos de marca actualizados.','success'); window.__SIGA_APP__.applyBranding();
-        });
-      }
-    }
-    paint();
-  }
 };
 
 /* ---------------- Generic simple-catalog manager (Firmas, Países, Oficinas) ---------------- */
